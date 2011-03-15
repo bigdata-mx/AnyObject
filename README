@@ -4,7 +4,23 @@ AnyObject is an common interface for key/value serialization languages like YAML
 
 Implementations
 ============
-AnyObject provides base implementations for SnakeYAML [1] and Jackson Java JSON Processor [2]
+AnyObject provides base implementations for SnakeYAML [1] and Jackson Java JSON Processor [2], but it can be used to wrap any key/value based data format.
+
+Usage
+=====
+Create AnyObject from SnakeYAML:
+
+    File file = new File("test.yaml");
+    AnyObject yaml = SnakeYAMLLoader.load(file);
+    yaml.getString("receipt");
+    yaml.getString("customer.given");
+
+# YAML snippet
+receipt:     Oz-Ware Purchase Invoice
+date:        2007-08-06
+customer:
+    given:   Dorothy
+    family:  Gale
 
 
 [1] http://code.google.com/p/snakeyaml/
