@@ -6,8 +6,8 @@ Implementations
 ============
 AnyObject provides base implementations for SnakeYAML [1] and Jackson Java JSON Processor [2], but it can be used to wrap any key/value based data format.
 
-Usage
-=====
+Usage YAML
+==========
 Create AnyObject from SnakeYAML:
 
     File file = new File("test.yaml");
@@ -22,6 +22,9 @@ customer:
     given:   Dorothy
     family:  Gale
 
+
+Usage JSON
+==========
 Create AnyObject from Jackson JSON:
 
     File file = new File("test.json");
