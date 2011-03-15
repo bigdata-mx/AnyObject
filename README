@@ -22,7 +22,6 @@ customer:
     given:   Dorothy
     family:  Gale
 
-
 Usage JSON
 ==========
 Create AnyObject from Jackson JSON:
