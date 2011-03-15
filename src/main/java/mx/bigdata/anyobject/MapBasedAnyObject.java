@@ -17,6 +17,8 @@
 package mx.bigdata.anyobject;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MapBasedAnyObject implements AnyObject {
@@ -30,7 +32,7 @@ public class MapBasedAnyObject implements AnyObject {
   }
 
   public MapBasedAnyObject(Map map, String separator) {
-    this.map = map;
+    this.map = new HashMap(map);
     this.separator = separator;
   }
 
@@ -69,12 +71,55 @@ public class MapBasedAnyObject implements AnyObject {
     return (Float) get(key);    
   }
 
-  public Iterable getIterable(String key) {
-    return (Iterable) get(key);
+  public Iterable getIterable(final String key) {
+    return new AnyIterable((Iterable) get(key));
   }
 
   public String toString() {
     return map.toString();
   }
 
+  private final static class AnyIterator implements Iterator {
+
+    private final Iterator iterator;
+
+    AnyIterator(Iterator iterator) {
+      this.iterator = iterator;
+    }
+    
+    @Override
+    public boolean hasNext() {
+      return iterator.hasNext();
+    }
+    
+    @Override
+    public Object next() {
+      Object o = iterator.next();
+      if (o instanceof Iterable) {
+        return new AnyIterable((Iterable) o);
+      }
+      if (o instanceof Map) {
+        return new MapBasedAnyObject((Map) o);
+      }
+      return o;
+    }
+    
+    @Override
+    public void remove() {
+      throw new UnsupportedOperationException();
+    }
+  }
+
+  private final static class AnyIterable implements Iterable {
+    private final Iterable iterable;
+
+    AnyIterable(Iterable iterable) {
+      this.iterable = iterable;
+    }
+    
+    @Override
+    public Iterator iterator() {
+      return new AnyIterator(iterable.iterator());
+    }
+  }
 }
