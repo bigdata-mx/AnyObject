@@ -22,6 +22,27 @@ customer:
     given:   Dorothy
     family:  Gale
 
+Create AnyObject from Jackson JSON:
+
+    File file = new File("test.json");
+    AnyObject json = JacksonJSONLoader.load(in);
+    json.getString("firstName");
+    json.getInteger("age").intValue();
+    json.getString("address.city");
+
+# JSON snippet
+{
+     "firstName": "John",
+     "lastName": "Smith",
+     "age": 25,
+     "address":
+     {
+         "streetAddress": "21 2nd Street",
+         "city": "New York",
+         "state": "NY",
+         "postalCode": "10021"
+     }
+}
 
 [1] http://code.google.com/p/snakeyaml/
 [2] http://jackson.codehaus.org/
