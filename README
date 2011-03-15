@@ -1,0 +1,11 @@
+AnyObject
+========
+AnyObject is an common interface for key/value serialization languages like YAML and JSON
+
+Implementations
+============
+AnyObject provides base implementations for SnakeYAML [1] and Jackson Java JSON Processor [2]
+
+
+[1] http://code.google.com/p/snakeyaml/
+[2] http://jackson.codehaus.org/
