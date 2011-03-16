@@ -7,6 +7,12 @@
   <version>0.9-SNAPSHOT</version>
   <packaging>jar</packaging>
 
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+
   <name>AnyObject</name>
   <url></url>
   <issueManagement>
@@ -23,7 +29,7 @@
   </licenses>
 
   <scm>
-    <url>scm:git:git://github.com/elmer-garduno/AnyObject.git</url>
+    <url>git://github.com/elmer-garduno/AnyObject.git</url>
     <connection>scm:git:git@github.com:elmer-garduno/AnyObject.git</connection>
     <developerConnection>scm:git:git@github.com:elmer-garduno/AnyObject.git</developerConnection>
   </scm>
