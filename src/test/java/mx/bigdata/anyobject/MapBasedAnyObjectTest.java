@@ -14,14 +14,47 @@
  *  limitations under the License.
  */
 
-package mx.bigdata.anyobject.impl;
+package mx.bigdata.anyobject;
+
+import java.io.InputStream;
 
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
+
+import mx.bigdata.anyobject.impl.SnakeYAMLLoader;
 
 public class MapBasedAnyObjectTest {
 
+  MapBasedAnyObject yaml;
+  
+  @Before
+  public void init() throws Exception {
+    InputStream in = getClass().getResourceAsStream("/test.yaml");
+    this.yaml = (MapBasedAnyObject) SnakeYAMLLoader.load(in);  
+  }
+
   @Test
-  public void testGetSubfield() throws Exception {    
+  public void testGet() throws Exception {    
+    assertNotNull(yaml.get("receipt"));
+    assertNull(yaml.get("nothing")); 
+    assertNotNull(yaml.get("customer.given"));
+  }
+
+  @Test
+  public void testGetAnyObject() throws Exception {    
+    assertTrue((yaml.getAnyObject("customer") instanceof AnyObject));
+    assertNull(yaml.getAnyObject("nothing")); 
+  }  
+
+  @Test
+  public void testGetIterable() throws Exception {    
+    assertTrue((yaml.getIterable("items") instanceof Iterable));
+    assertNull(yaml.getIterable("nothing")); 
+  }  
+  
+  @Test(expected = NullPointerException.class)
+  public void testWrongPath() throws Exception { 
+    yaml.get("nothing.given");   
   }
 }

@@ -36,7 +36,7 @@ public class MapBasedAnyObject implements AnyObject {
     this.separator = separator;
   }
 
-  private Object get(String key) {
+  Object get(String key) {
     return get(map, key.split("\\."));    
   }
 
@@ -48,7 +48,13 @@ public class MapBasedAnyObject implements AnyObject {
   } 
 
   public AnyObject getAnyObject(String key) {
-    return new MapBasedAnyObject((Map) get(key));
+    Map map = (Map) get(key);
+    return (map == null) ? null : new MapBasedAnyObject(map);
+  }
+
+  public Iterable getIterable(final String key) {
+    Iterable iterable = (Iterable) get(key);
+    return (iterable == null) ? null :  new AnyIterable(iterable);
   }
 
   public Long getLong(String key) {
@@ -69,10 +75,6 @@ public class MapBasedAnyObject implements AnyObject {
 
   public Float getFloat(String key) {
     return (Float) get(key);    
-  }
-
-  public Iterable getIterable(final String key) {
-    return new AnyIterable((Iterable) get(key));
   }
 
   public String toString() {

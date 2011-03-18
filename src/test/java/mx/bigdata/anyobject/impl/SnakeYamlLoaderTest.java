@@ -56,7 +56,6 @@ public class SnakeYamlLoaderTest {
     Iterable items = yaml.getIterable("numbers");
     int num = 0;
     for (Object o : items) {
-      assertTrue((o instanceof Integer));
       Integer item = (Integer) o;
       assertEquals(num++, item.intValue());
     }
