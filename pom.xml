@@ -3,7 +3,7 @@
 
   <groupId>mx.bigdata.anyobject</groupId>
   <artifactId>anyobject</artifactId>
-  <version>0.9.1-SNAPSHOT</version>
+  <version>0.9.1</version>
   <packaging>jar</packaging>
 
   <parent>
