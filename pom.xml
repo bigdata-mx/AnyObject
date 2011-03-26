@@ -13,10 +13,10 @@
   </parent>
 
   <name>AnyObject</name>
-  <url>https://github.com/elmer-garduno/AnyObject/</url>
+  <url>https://github.com/bigdata-mx/AnyObject/</url>
   <issueManagement>
     <system>github.com</system>
-    <url>https://github.com/elmer-garduno/AnyObject/issues</url>
+    <url>https://github.com/bigdata-mx/AnyObject/issues</url>
   </issueManagement>
   <inceptionYear>2011</inceptionYear>
   <licenses>
@@ -28,9 +28,9 @@
   </licenses>
 
   <scm>
-    <url>git://github.com/elmer-garduno/AnyObject.git</url>
-    <connection>scm:git:git@github.com:elmer-garduno/AnyObject.git</connection>
-    <developerConnection>scm:git:git@github.com:elmer-garduno/AnyObject.git</developerConnection>
+    <url>git://github.com/bigdata-mx/AnyObject.git</url>
+    <connection>scm:git:git@github.com:bigdata-mx/AnyObject.git</connection>
+    <developerConnection>scm:git:git@github.com:bigdata-mx/AnyObject.git</developerConnection>
   </scm>
 
   <properties>
