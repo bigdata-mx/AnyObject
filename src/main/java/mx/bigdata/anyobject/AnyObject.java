@@ -30,6 +30,20 @@ public interface AnyObject {
 
   String getString(String key);
 
+  Boolean getBoolean(String key);
+
   Iterable getIterable(String key);
+
+  Double getDouble(String key, Double defValue);
+
+  Float getFloat(String key, Float defValue);
+
+  Long getLong(String key, Long defValue);
+
+  Integer getInteger(String key, Integer defValue);
+
+  String getString(String key, String defValue);
+
+  Boolean getBoolean(String key, Boolean defValue);
 
 }

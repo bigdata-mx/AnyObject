@@ -77,6 +77,39 @@ public class MapBasedAnyObject implements AnyObject {
     return (Float) get(key);    
   }
 
+  public Boolean getBoolean(String key) {
+    return (Boolean) get(key);    
+  }
+
+  private Object get(String key, Object defValue) {
+    Object o = get(key);
+    return (o != null) ? o : defValue;
+  }
+
+  public Long getLong(String key, Long defValue) {
+    return (Long) get(key, defValue);
+  }
+
+  public Integer getInteger(String key, Integer defValue) {
+    return (Integer) get(key, defValue);
+  }
+
+  public String getString(String key, String defValue) {
+    return (String) get(key, defValue);
+  }
+
+  public Double getDouble(String key, Double defValue) {
+    return (Double) get(key, defValue);  
+  }
+
+  public Float getFloat(String key, Float defValue) {
+    return (Float) get(key, defValue);    
+  }
+
+  public Boolean getBoolean(String key, Boolean defValue) {
+    return (Boolean) get(key, defValue);    
+  }
+
   public String toString() {
     return map.toString();
   }
