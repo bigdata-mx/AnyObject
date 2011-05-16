@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -40,6 +41,18 @@ public final class SnakeYAMLLoader {
   }
 
   public static AnyObject load(InputStream in) throws IOException {
+    Yaml yaml = new Yaml();
+    Map<String, Object> map = (Map) yaml.load(in);
+    return new MapBasedAnyObject(map);
+  }
+
+  public static AnyObject load(Reader in) throws IOException {
+    Yaml yaml = new Yaml();
+    Map<String, Object> map = (Map) yaml.load(in);
+    return new MapBasedAnyObject(map);
+  }
+
+  public static AnyObject load(String in) throws IOException {
     Yaml yaml = new Yaml();
     Map<String, Object> map = (Map) yaml.load(in);
     return new MapBasedAnyObject(map);
