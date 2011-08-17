@@ -16,10 +16,14 @@
 
 package mx.bigdata.anyobject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class MapBasedAnyObject implements AnyObject {
 
@@ -108,6 +112,32 @@ public class MapBasedAnyObject implements AnyObject {
 
   public Boolean getBoolean(String key, Boolean defValue) {
     return (Boolean) get(key, defValue);    
+  }
+
+  public byte[] toJsonAsBytes() throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    byte[] result = null;
+    try {
+      mapper.writeValue(out, map);
+      result = out.toByteArray();
+    } finally {
+      out.close();
+    }
+    return result;
+  }
+
+  public String toJson() throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    String result = null;
+    try {
+      mapper.writeValue(out, map);
+      result = out.toString();
+    } finally {
+      out.close();
+    }
+    return result;
   }
 
   public String toString() {
