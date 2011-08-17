@@ -16,6 +16,8 @@
 
 package mx.bigdata.anyobject;
 
+import java.io.IOException;
+
 public interface AnyObject {
 
   AnyObject getAnyObject(String key);
@@ -45,5 +47,9 @@ public interface AnyObject {
   String getString(String key, String defValue);
 
   Boolean getBoolean(String key, Boolean defValue);
+
+  byte[] toJsonAsBytes() throws IOException;
+
+  String toJson() throws IOException;
 
 }
