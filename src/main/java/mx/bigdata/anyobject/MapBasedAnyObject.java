@@ -120,24 +120,21 @@ public class MapBasedAnyObject implements AnyObject {
     byte[] result = null;
     try {
       mapper.writeValue(out, map);
-      result = out.toByteArray();
+      return out.toByteArray();
     } finally {
       out.close();
     }
-    return result;
   }
 
   public String toJson() throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     ByteArrayOutputStream out = new ByteArrayOutputStream();
-    String result = null;
     try {
       mapper.writeValue(out, map);
-      result = out.toString();
+      return out.toString();
     } finally {
       out.close();
     }
-    return result;
   }
 
   public String toString() {
