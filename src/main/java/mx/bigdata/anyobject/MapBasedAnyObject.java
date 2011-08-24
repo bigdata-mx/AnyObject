@@ -117,7 +117,6 @@ public class MapBasedAnyObject implements AnyObject {
   public byte[] toJsonAsBytes() throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     ByteArrayOutputStream out = new ByteArrayOutputStream();
-    byte[] result = null;
     try {
       mapper.writeValue(out, map);
       return out.toByteArray();
