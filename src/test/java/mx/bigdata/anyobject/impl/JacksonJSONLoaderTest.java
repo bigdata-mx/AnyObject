@@ -31,7 +31,7 @@ public class JacksonJSONLoaderTest {
   @Before
   public void init() throws Exception { 
     InputStream in = getClass().getResourceAsStream("/test.json");
-    this.json = JacksonJSONLoader.load(in);
+    this.json = JacksonJSONLoader.getInstance().load(in);
   }
 
   @Test

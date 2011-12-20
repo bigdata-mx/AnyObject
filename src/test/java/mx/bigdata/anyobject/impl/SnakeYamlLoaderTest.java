@@ -31,7 +31,7 @@ public class SnakeYamlLoaderTest {
   @Before
   public void init() throws Exception {
     InputStream in = getClass().getResourceAsStream("/test.yaml");
-    this.yaml = SnakeYAMLLoader.load(in);  
+    this.yaml = SnakeYAMLLoader.getInstance().load(in);
   }
 
   @Test
