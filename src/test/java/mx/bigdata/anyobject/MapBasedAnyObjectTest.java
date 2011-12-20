@@ -31,7 +31,7 @@ public class MapBasedAnyObjectTest {
   @Before
   public void init() throws Exception {
     InputStream in = getClass().getResourceAsStream("/test.yaml");
-    this.yaml = (MapBasedAnyObject) SnakeYAMLLoader.load(in);  
+    this.yaml = (MapBasedAnyObject) SnakeYAMLLoader.getInstance().load(in);
   }
 
   @Test

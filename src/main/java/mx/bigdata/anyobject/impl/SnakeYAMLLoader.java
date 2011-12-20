@@ -24,14 +24,24 @@ import java.io.Reader;
 import java.util.Arrays;
 import java.util.Map;
 
+import mx.bigdata.anyobject.Loader;
 import org.yaml.snakeyaml.Yaml;
 
 import mx.bigdata.anyobject.MapBasedAnyObject;
 import mx.bigdata.anyobject.AnyObject;
 
-public final class SnakeYAMLLoader {
+public final class SnakeYAMLLoader implements Loader {
 
-  public static AnyObject load(File file) throws IOException {
+  private static final SnakeYAMLLoader instance = new SnakeYAMLLoader();
+
+  public static SnakeYAMLLoader getInstance() {
+      return instance;
+  }
+
+  private SnakeYAMLLoader() {
+  }
+
+  public AnyObject load(File file) throws IOException {
     InputStream in = new FileInputStream(file);
     try {
       return load(in);
@@ -40,19 +50,19 @@ public final class SnakeYAMLLoader {
     }
   }
 
-  public static AnyObject load(InputStream in) throws IOException {
+  public AnyObject load(InputStream in) throws IOException {
     Yaml yaml = new Yaml();
     Map<String, Object> map = (Map) yaml.load(in);
     return new MapBasedAnyObject(map);
   }
 
-  public static AnyObject load(Reader in) throws IOException {
+  public AnyObject load(Reader in) throws IOException {
     Yaml yaml = new Yaml();
     Map<String, Object> map = (Map) yaml.load(in);
     return new MapBasedAnyObject(map);
   }
 
-  public static AnyObject load(String in) throws IOException {
+  public AnyObject load(String in) throws IOException {
     Yaml yaml = new Yaml();
     Map<String, Object> map = (Map) yaml.load(in);
     return new MapBasedAnyObject(map);
