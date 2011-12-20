@@ -24,14 +24,24 @@ import java.io.Reader;
 import java.util.Arrays;
 import java.util.Map;
 
+import mx.bigdata.anyobject.Loader;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import mx.bigdata.anyobject.MapBasedAnyObject;
 import mx.bigdata.anyobject.AnyObject;
 
-public final class JacksonJSONLoader {
+public final class JacksonJSONLoader implements Loader {
 
-  public static AnyObject load(File file) throws IOException {
+  private static final JacksonJSONLoader instance = new JacksonJSONLoader();
+
+  public static JacksonJSONLoader getInstance() {
+    return instance;
+  }
+
+  private JacksonJSONLoader() {
+  }
+
+  public AnyObject load(File file) throws IOException {
     InputStream in = new FileInputStream(file);
     try {
       return load(in);
@@ -40,19 +50,19 @@ public final class JacksonJSONLoader {
     }
   }
 
-  public static AnyObject load(InputStream in) throws IOException {
+  public AnyObject load(InputStream in) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     Map<String, Object> map = mapper.readValue(in, Map.class);
     return new MapBasedAnyObject(map);
   }
   
-  public static AnyObject load(Reader in) throws IOException {
+  public AnyObject load(Reader in) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     Map<String, Object> map = mapper.readValue(in, Map.class);
     return new MapBasedAnyObject(map);
   }
 
-  public static AnyObject load(String in) throws IOException {
+  public AnyObject load(String in) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     Map<String, Object> map = mapper.readValue(in, Map.class);
     return new MapBasedAnyObject(map);
