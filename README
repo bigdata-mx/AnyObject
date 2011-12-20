@@ -11,7 +11,7 @@ Usage YAML
 Create AnyObject from SnakeYAML:
 
     File file = new File("test.yaml");
-    AnyObject yaml = SnakeYAMLLoader.load(file);
+    AnyObject yaml = SnakeYAMLLoader.getInstance().load(file);
     yaml.getString("receipt");
     yaml.getString("customer.given");
 
