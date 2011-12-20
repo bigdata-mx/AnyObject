@@ -27,7 +27,7 @@ Usage JSON
 Create AnyObject from Jackson JSON:
 
     File file = new File("test.json");
-    AnyObject json = JacksonJSONLoader.load(in);
+    AnyObject json = JacksonJSONLoader.getInstance().load(in);
     json.getString("firstName");
     json.getInteger("age").intValue();
     json.getString("address.city");
