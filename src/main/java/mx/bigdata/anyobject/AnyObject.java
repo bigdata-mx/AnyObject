@@ -34,7 +34,7 @@ public interface AnyObject {
 
   Boolean getBoolean(String key);
 
-  Iterable getIterable(String key);
+  <T> Iterable<T> getIterable(String key);
 
   Double getDouble(String key, Double defValue);
 
@@ -51,5 +51,7 @@ public interface AnyObject {
   byte[] toJsonAsBytes() throws IOException;
 
   String toJson() throws IOException;
+
+  Iterable<AnyTuple> getTuples();
 
 }
