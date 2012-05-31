@@ -20,7 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -36,35 +36,43 @@ public class MapBasedAnyObject implements AnyObject {
   }
 
   public MapBasedAnyObject(Map map, String separator) {
-    this.map = new HashMap(map);
+    this.map = new LinkedHashMap(map);
     this.separator = separator;
   }
 
-  Object get(String key) {
+  <T> T get(String key) {
     return get(map, key.split("\\."));    
   }
 
-  private Object get(Map inner, String[] key) {
+  private <T> T get(Map inner, String[] key) {
     Object o = inner.get(key[0]);
-    return (key.length > 1) 
-      ? get((Map) o, Arrays.copyOfRange(key, 1, key.length))
-      : o; 
+    return (T) ((key.length > 1) 
+      ? get((Map) o, Arrays.copyOfRange(key, 1, key.length)) : o); 
   } 
-
+  
+  @Override
   public AnyObject getAnyObject(String key) {
     Map map = (Map) get(key);
     return (map == null) ? null : new MapBasedAnyObject(map);
   }
-
-  public Iterable getIterable(final String key) {
-    Iterable iterable = (Iterable) get(key);
-    return (iterable == null) ? null :  new AnyIterable(iterable);
+  
+  @Override
+  public <T> Iterable<T> getIterable(final String key) {
+    Iterable<T> iterable = get(key);
+    return (iterable == null) ? null : new AnyIterable(iterable);
   }
 
+  @Override
+  public Iterable<AnyTuple> getTuples() {
+    return new AnyTupleIterable(map);
+  }
+  
+  @Override
   public Long getLong(String key) {
     return (Long) get(key);
   }
-
+  
+  @Override
   public Integer getInteger(String key) {
     return (Integer) get(key);
   }
@@ -181,6 +189,52 @@ public class MapBasedAnyObject implements AnyObject {
     @Override
     public Iterator iterator() {
       return new AnyIterator(iterable.iterator());
+    }
+  }
+ 
+  private final static class AnyTupleIterable implements Iterable<AnyTuple> {
+    private final Map map;
+
+    AnyTupleIterable(Map map) {
+      this.map = map;
+    }
+    
+    @Override
+    public Iterator<AnyTuple> iterator() {
+      return new AnyTupleIterator(map.entrySet().iterator());
+    }
+  }
+ 
+  private final static class AnyTupleIterator implements Iterator<AnyTuple> {
+
+    private final Iterator iterator;
+
+    AnyTupleIterator(Iterator iterator) {
+      this.iterator = iterator;
+    }
+    
+    @Override
+    public boolean hasNext() {
+      return iterator.hasNext();
+    }
+    
+    @Override
+    public AnyTuple next() {
+      Map.Entry<String, Object> me = (Map.Entry<String, Object>) iterator.next();
+      String key = me.getKey();
+      Object o = me.getValue();
+      if (o instanceof Iterable) {
+        return new AnyTuple(key, new AnyIterable((Iterable) o));
+      }
+      if (o instanceof Map) {
+        return new AnyTuple(key, new MapBasedAnyObject((Map) o));
+      }
+      return new AnyTuple(key, o);
+    }
+    
+    @Override
+    public void remove() {
+      throw new UnsupportedOperationException();
     }
   }
 }
