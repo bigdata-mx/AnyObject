@@ -40,8 +40,10 @@ public class MapBasedAnyObject implements AnyObject {
     this.separator = separator;
   }
 
+  // See https://bugs.eclipse.org/bugs/show_bug.cgi?id=98379
+  // See http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6302954
   <T> T get(String key) {
-    return get(map, key.split("\\."));    
+    return this.<T>get(map, key.split("\\."));    
   }
 
   private <T> T get(Map inner, String[] key) {
