@@ -52,8 +52,14 @@ public class MapBasedAnyObject implements AnyObject {
   
   @Override
   public AnyObject getAnyObject(String key) {
-    Map map = (Map) get(key);
-    return (map == null) ? null : new MapBasedAnyObject(map);
+    Object o = get(key);
+    if (o == null) {
+      return null;
+    }
+    if (o instanceof Map) {
+      return new MapBasedAnyObject((Map) o);
+    }
+    return (MapBasedAnyObject) o;
   }
   
   @Override
