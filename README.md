@@ -1,5 +1,8 @@
 AnyObject
 ========
+
+[![Build Status](https://secure.travis-ci.org/bigdata-mx/AnyObject.png)](http://travis-ci.org/bigdata-mx/AnyObject)
+
 AnyObject is an common interface for key/value serialization languages like YAML and JSON
 
 Implementations
