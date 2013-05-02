@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import mx.bigdata.anyobject.Loader;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mx.bigdata.anyobject.MapBasedAnyObject;
 import mx.bigdata.anyobject.AnyObject;
