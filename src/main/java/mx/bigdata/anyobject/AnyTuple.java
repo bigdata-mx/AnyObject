@@ -17,8 +17,9 @@
 package mx.bigdata.anyobject;
 
 import java.util.Arrays;
+import java.io.Serializable;
 
-public class AnyTuple {
+public class AnyTuple implements Serializable {
   private final String key;
   
   private final Object o;

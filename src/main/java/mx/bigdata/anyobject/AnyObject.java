@@ -17,8 +17,9 @@
 package mx.bigdata.anyobject;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public interface AnyObject {
+public interface AnyObject extends Serializable {
 
   AnyObject getAnyObject(String key);
 
